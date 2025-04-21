@@ -214,7 +214,7 @@ public class Email {
 
 이 구현으로 모든 테스트가 성공적으로 통과했습니다(GREEN 단계).
 
-![테스트 통과 스크린샷](../../../assets/lib/img/posts/tdd1.png)
+![테스트 통과 스크린샷](/assets/img/posts/tdd1.png)
 
 ## 구현 과정에서의 고려사항
 

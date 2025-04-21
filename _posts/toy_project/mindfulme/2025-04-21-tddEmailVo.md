@@ -15,7 +15,8 @@ permalink: /posts/java/:title/
 
 처음에는 이메일을 단순히 String으로 사용하는 것과 객체로 만드는 것의 차이점이 명확하지 않았습니다. 학습을 통해 값 객체가 DDD에서 중요한 개념임을 알게 되었습니다.
 
-값 객체의 주요 특징:
+### 값 객체의 주요 특징
+
 - **식별성 없음**: 고유 식별자 대신 값 자체로 구분됩니다.
 - **불변성(Immutability)**: 생성 후에는 상태를 변경할 수 없습니다.
 - **동등성(Equality)**: 같은 값을 가진 객체들은 동등합니다.
@@ -31,16 +32,16 @@ TDD는 "테스트를 먼저 작성하고, 이후에 구현한다"는 접근 방�
 ### 1단계: 테스트 작성 (RED)
 
 Email 클래스가 어떻게 동작해야 할지 테스트 코드로 정의했습니다.
-아마도 홈페이지에 필요한 이미지 검증 절차는 다음과 같을 것입니다.
-- 유효한 이메일 방식이면 Email 객체가 생성된다 
-- 이메일 형식이 유효하지 않으면 예외가 발생한다 
-- 이메일 값이 null이면 예외가 발생한다 
-- 동일한 값을 가진 Email 객체는 동등하다 
+테스트에 필요한 검증 절차는 다음과 같습니다:
+
+- 유효한 이메일 방식이면 Email 객체가 생성된다
+- 이메일 형식이 유효하지 않으면 예외가 발생한다
+- 이메일 값이 null이면 예외가 발생한다
+- 동일한 값을 가진 Email 객체는 동등하다
 - 이메일 도메인 부분이 유효하지 않으면 예외가 발생한다
-- Email 객체의 toString은 이메일 주소를 반환한다 
+- Email 객체의 toString은 이메일 주소를 반환한다
 
 원칙을 먼저 정하고, 이에 따라 테스트 코드를 작성했습니다.
-
 
 ```java
 package com.mindful.domain.user.vo;
@@ -103,7 +104,7 @@ class EmailTest {
 
     @Test
     @DisplayName("이메일 도메인 부분이 유효하지 않으면 예외가 발생한다")
-    void emailValid(){
+    void emailValid() {
         // given
         String emailWithInvalidDomain = "user@invalid"; // 도메인이 불완전함
 
@@ -115,7 +116,7 @@ class EmailTest {
 
     @Test
     @DisplayName("Email 객체의 toString은 이메일 주소를 반환한다")
-    void emailReturn(){
+    void emailReturn() {
         // given
         String emailStr = "user@example.com";
         Email email = new Email(emailStr);
@@ -126,7 +127,8 @@ class EmailTest {
 }
 ```
 
-이 단계에서 배운 점:
+#### 이 단계에서 배운 점:
+
 - **given-when-then 패턴**은 테스트를 논리적으로 구조화하는 효과적인 방법입니다.
 - **@DisplayName** 어노테이션을 통해 테스트의 목적을 한글로 명확하게 표현할 수 있습니다.
 - **assertThatThrownBy** 메서드를 사용하여 예외 발생을 검증하는 방법을 학습했습니다.
@@ -137,7 +139,8 @@ class EmailTest {
 
 테스트를 통과시키기 위해 실제 Email 클래스와 검증 서비스를 구현했습니다. 처음에는 모든 기능을 Email 클래스에 넣으려 했으나, 단일 책임 원칙(SRP)에 따라 검증 로직을 별도의 클래스로 분리했습니다.
 
-**EmailValidateService.java**:
+#### EmailValidateService.java
+
 ```java
 package com.mindful.domain.user.service;
 
@@ -169,7 +172,8 @@ public class EmailValidateService {
 }
 ```
 
-**Email.java**:
+#### Email.java
+
 ```java
 package com.mindful.domain.user.vo;
 
@@ -221,11 +225,10 @@ public class Email {
 3. **Lombok 활용**: `@Getter` 어노테이션을 사용하여 반복적인 코드를 줄였습니다.
 4. **표준 준수**: 이메일 검증에 RFC 5322 표준을 준수하는 정규식을 사용했습니다.
 
-
-현재는 TDD의 RED와 GREEN 단계까지 완료했습니다. 앞으로 추가 요구사항이 생기면 REFACTOR 작업을 진행할 예정입니다
-
+현재는 TDD의 RED와 GREEN 단계까지 완료했습니다. 앞으로 추가 요구사항이 생기면 REFACTOR 작업을 진행할 예정입니다.
 
 ## 학습 소감
 
-TDD 방식으로 값 객체를 구현해본 것은 매우 의미 있는 경험이었습니다. 테스트를 먼저 작성하니 구현해야 할 기능이 명확해지고, 코드의 신뢰성을 확보할 수 있었습니다. 특히 값 객체 패턴을 통해 이메일이라는 도메인 개념을 더 명확하게 표현할 수 있었고, 이는 앞으로 다른 값 객체(Password, Username 등)를 구현할 때도 유용하게 적용할 수 있을 것입니다.
+TDD 방식으로 값 객체를 구현해본 것은 매우 의미 있는 경험이었습니다. 테스트를 먼저 작성하니 구현해야 할 기능이 명확해지고, 코드의 신뢰성을 확보할 수 있었습니다. 
 
+특히 값 객체 패턴을 통해 이메일이라는 도메인 개념을 더 명확하게 표현할 수 있었고, 이는 앞으로 다른 값 객체(Password, Username 등)를 구현할 때도 유용하게 적용할 수 있을 것입니다.

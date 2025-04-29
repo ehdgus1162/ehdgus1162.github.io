@@ -157,6 +157,7 @@ baseurl: ""
 kramdown:
   footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
+  math_engine: mathjax
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
     # default_lang: console
@@ -224,3 +225,13 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+syntax_highlighter_style: 'monokai'  # 원하는 코드 스타일 테마
+highlight_lang_aware: true  # 코드 블록 위에 언어 표시
+
+
+highlight_theme: github  # 가능한 값: github, monokai, nord 등
+highlight_theme_light: github # 라이트 모드 테마
+# 코드 블록에 줄 번호 표시 설정
+code_copy_btn_text: "Copy"
+code_copy_button: true  # 코드 복사 버튼 표시

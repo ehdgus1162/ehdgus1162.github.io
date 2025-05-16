@@ -235,3 +235,4 @@ highlight_theme_light: github # 라이트 모드 테마
 # 코드 블록에 줄 번호 표시 설정
 code_copy_btn_text: "Copy"
 code_copy_button: true  # 코드 복사 버튼 표시
+
